@@ -6,16 +6,27 @@ if Rails.env.development?
     user = User.new(
       name:     Faker::Name.name, 
       email:    Faker::Internet.email,
-      password: Faker::Lorem.characters(10),
+      password: Faker::Lorem.characters(10)
     )
     user.skip_confirmation!
     user.save!
   end
-  if User.where({email: 'noel@bloccit.com'}).count == 0
+  if User.where({email: 'admin@bloccit.com'}).count == 0
+    user = User.new(
+      name:     'Administrator', 
+      email:    'admin@bloccit.com',
+      password: 'helloworld',
+      role:     'admin'
+    )
+    user.skip_confirmation!
+    user.save!
+  end
+  if User.where({email: 'noel.deguzman@me.com'}).count == 0
     user = User.new(
       name:     'Noel Deguzman', 
       email:    'noel.deguzman@me.com',
-      password: 'helloworld'
+      password: 'helloworld',
+      role:     'premium'
     )
     user.skip_confirmation!
     user.save!
@@ -33,6 +44,9 @@ if Rails.env.development?
   wikis = Wiki.all
 
   puts "Seed finished"
+  users.each do |user|
+    puts "#{user.name} role: #{user.role}"
+  end
   puts "#{User.count} users created"
   puts "#{Wiki.count} wikis created"
 end
