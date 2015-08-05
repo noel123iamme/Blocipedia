@@ -22,6 +22,17 @@ if Rails.env.development?
   end
   users = User.all
 
+  25.times do
+    wiki = Wiki.new(
+      title: Faker::Lorem.sentence,
+      body:  Faker::Lorem.paragraph,
+      user:  users.sample
+    )
+    wiki.save!
+  end
+  wikis = Wiki.all
+
   puts "Seed finished"
   puts "#{User.count} users created"
+  puts "#{Wiki.count} wikis created"
 end
