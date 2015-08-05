@@ -51,7 +51,7 @@ group :development, :test do
 end
 
 #gem 'bcrypt-ruby', :require => 'bcrypt'
-gem 'figaro', '1.0'
+gem 'figaro'
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'faker'
