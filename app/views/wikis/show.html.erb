@@ -1,8 +1,12 @@
-<h1><%= @wiki.title %></h1>
+<h1><%= markdown_to_html(@wiki.title) %></h1>
+<small>
+   submitted <%= time_ago_in_words(@wiki.created_at) %> ago by
+   <%= @wiki.user.name %>
+</small>
 <div class="media">
   <div class="media-body">
     <h4 class="media-heading">
-      <p><%= @wiki.body %></p>
+      <p><%= markdown_to_html(@wiki.body) %></p>
     </h4>
   </div>
 </div>
