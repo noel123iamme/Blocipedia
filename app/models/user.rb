@@ -6,19 +6,27 @@ class User < ActiveRecord::Base
 
   has_many :wikis
 
-  after_initialize :default_role
+  after_create :default_role
 
-  def Admin?
-  	role == 'admin'
+  def admin?
+    role == 'admin'
   end
 
-  def Premium?
-  	role == 'premium'
+  def premium?
+    role == 'premium'
+  end
+
+  def standard?
+    role == 'standard'
+  end
+
+  def upgrade_to_premium
+    update_attributes(role: 'premium')
   end
 
   private
 
   def default_role
-  	self.role = 'standard'
+    update_attributes(role: 'standard')
   end
 end
