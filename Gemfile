@@ -57,4 +57,4 @@ gem 'devise'
 gem 'faker'
 gem 'pundit'
 gem 'stripe'
-
+gem 'will_paginate', '~> 3.0.5'

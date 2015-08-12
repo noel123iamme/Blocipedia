@@ -6,7 +6,7 @@ if Rails.env.development?
     user = User.new(
       name:     Faker::Name.name, 
       email:    Faker::Internet.email,
-      password: Faker::Lorem.characters(10)
+      password: 'helloworld'
     )
     user.skip_confirmation!
     user.save!
@@ -26,7 +26,7 @@ if Rails.env.development?
       name:     'Noel Deguzman', 
       email:    'noel.deguzman@me.com',
       password: 'helloworld',
-      role:     'premium'
+      role:     'premium',
     )
     user.skip_confirmation!
     user.save!
@@ -45,7 +45,7 @@ if Rails.env.development?
 
   puts "Seed finished"
   users.each do |user|
-    puts "#{user.name} role: #{user.role}"
+    puts "#{user.email} role: #{user.role}"
   end
   puts "#{User.count} users created"
   puts "#{Wiki.count} wikis created"
