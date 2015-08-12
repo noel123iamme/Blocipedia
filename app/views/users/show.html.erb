@@ -4,11 +4,6 @@
         <div class="media-body">
             <h2 class="media-heading"><%= @user.name %></h2>
             <p class="media-body"><%= @user.email %></p>
-            <p class="media-body"><%= @user.role %></p>
-            <% if current_user.role == 'standard' %>
-              <%= link_to "Upgrade to Premium", new_charge_path, class: 'btn btn-succes' %>
-            <% end %>
-            <br>
           </div>
       </div>
     </div>

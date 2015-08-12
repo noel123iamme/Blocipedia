@@ -19,7 +19,7 @@ class ChargesController < ApplicationController
     flash[:success] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
     current_user.upgrade_to_premium
     current_user.save
-    redirect_to user_path(current_user) # or wherever
+    redirect_to edit_user_registration_path(current_user) # or wherever
  
     # Stripe will send back CardErrors, with friendly messages
     # when something goes wrong.

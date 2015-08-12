@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     update_attributes(role: 'premium')
   end
 
+  def downgrade_to_standard
+    update_attributes(role: 'standard')
+  end
+
   private
 
   def default_role
