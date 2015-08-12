@@ -1,9 +1,9 @@
 <h1><%= @wiki.title %></h1>
 <div class="media">
-	<div class="media-body">
-		<h4 class="media-heading">
-			<p><%= @wiki.body %></p>
-		</h4>
-	</div>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <p><%= @wiki.body %></p>
+    </h4>
+  </div>
 </div>
 <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
