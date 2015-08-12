@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :wikis
 
-  after_create :default_role
+  after_initialize :default_role
 
   def admin?
     role == 'admin'
@@ -31,6 +31,6 @@ class User < ActiveRecord::Base
   private
 
   def default_role
-    update_attributes(role: 'standard')
+    self.role ||= 'standard'
   end
 end
