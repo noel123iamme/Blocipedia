@@ -1,0 +1,15 @@
+<%= form_for [collaborator], remote: true do |f| %>
+<div class="row">
+  <div class="col-md-2">
+    <%= f.label "Add a collaborator:" %>
+  </div>
+    <div class="col-md-3">
+    <%= f.select :user_id, User.where.not(id: @wiki.users) { |u| [ u.email, u.id ] }, include_blank: true %>
+  </div>
+  <div class="col-md-1">
+    <div class="form-group">
+      <%= f.submit "Save", class: 'btn btn-success' %>
+    </div>
+  </div>
+</div>
+<% end %>

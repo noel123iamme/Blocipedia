@@ -1,0 +1,19 @@
+<%= content_tag :div, class: "media", id: "collaborator-#{collaborator.id}" do %> 
+  <div class="media-body">
+    <small>
+      <div class="row">
+        <div class="col-md-2">
+          <%= collaborator.user.name %>
+        </div>
+        <div class="col-md-4">
+          <%= collaborator.user.email %>
+        </div>
+        <% if current_user.admin? || (current_user.premium? && @wiki.user_id = current_user.id) %>
+          <div class="col-md-1">
+            <%= link_to "", [collaborator], method: :delete, remote: true, class: 'text-center', class: 'glyphicon glyphicon-remove' %>
+          </div>
+        <% end %>
+      </div>
+    </small>
+  </div>
+<% end %>

@@ -8,19 +8,25 @@ class WikiPolicy < ApplicationPolicy
     end
 
     def resolve
-      if user.present? 
-          scope.all
+      wikis = []
+      if user.admin?
+        wikis = scope.all
+      elsif user.premium?
+        all_wikis = scope.all 
+        all_wikis.each do |wiki|
+          if wiki.public? || wiki.user == user || wiki.users.include?(user)
+            wikis << wiki
+          end
+        end
       else
-        scope
+        all_wikis = scope.all 
+        all_wikis.each do |wiki|
+          if wiki.users.include?(user) || wiki.public?
+            wikis << wiki
+          end
+        end
       end
+      wikis
     end
-  end
-
-  def index?
-    user.present? 
-  end
-
-  def destroy?
-    user.present? && (record.user == user || user.admin?)
   end
 end

@@ -1,11 +1,12 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.visible_to(current_user).paginate(page: params[:page], per_page: 10)
-    authorize @wikis
+    @wikis = policy_scope(Wiki)
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    @collaborators = @wiki.collaborators
+    @collaborator = Collaborator.new(wiki_id: @wiki.id)
     authorize @wiki
   end
 
@@ -16,6 +17,7 @@ class WikisController < ApplicationController
 
   def create
     @wiki = Wiki.new(wiki_params)
+    @wiki.user = current_user
     authorize @wiki
     if @wiki.save
       flash[:notice] = "Wiki was saved."
@@ -28,6 +30,8 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @collaborators = @wiki.collaborators
+    @collaborator = Collaborator.new 
     authorize @wiki
   end
 
@@ -40,6 +44,18 @@ class WikisController < ApplicationController
     else
       flash[:error] = "There was an error saving the wiki. Please try again."
       render :edit
+    end
+  end
+
+  def destroy
+    @wiki = Wiki.find(params[:id])
+    authorize @wiki
+    if @wiki.destroy
+      flash[:notice] = "\"#{@wiki.name}\" was deleted successfully."
+      redirect_to wiki_path
+    else
+      flash[:error] = "There was an error deleting the wiki."
+      render :show
     end
   end
 
