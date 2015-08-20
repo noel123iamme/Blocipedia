@@ -1,0 +1,6 @@
+<% if @collaborator.valid? %>
+   $('.js-collaborator').append("<%= escape_javascript(render(@collaborator)) %>");
+   $('.new-collaborator').html("<%= escape_javascript(render partial: 'collaborators/form', locals: { collaborator: @new_collaborator, wiki: @wiki }) %>");
+<% else %>
+   $('.new-collaborator').html("<%= escape_javascript(render partial: 'collaborators/form', locals: { collaborator: @collaborator, wiki: @wiki }) %>");
+<% end %>

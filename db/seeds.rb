@@ -43,6 +43,14 @@ if Rails.env.development?
   end
   wikis = Wiki.all
 
+  50.times do
+    collaborator = Collaborator.new(
+      wiki:  wikis.sample,
+      user:  users.sample
+    )
+    collaborator.save!
+  end
+
   puts "Seed finished"
   users.each do |user|
     puts "#{user.email} role: #{user.role}"

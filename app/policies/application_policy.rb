@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    update?
+    update? && (record.user == user || user.admin?)
   end
 
   def scope

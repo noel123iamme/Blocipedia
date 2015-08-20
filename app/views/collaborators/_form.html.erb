@@ -1,0 +1,16 @@
+<%= form_for [collaborator], remote: true do |f| %>
+<div class="row">
+  <div class="col-md-2">
+    <%= f.label "Add a collaborator:" %>
+  </div>
+    <div class="col-md-3">
+    <%= f.select :user_id, User.where.not(id: @wiki.users).map { |u| [ u.email, u.id ] }, include_blank: true %>
+  </div>
+  <div class="col-md-1">
+    <div class="form-group">
+      <%= hidden_field_tag :wiki_id, @wiki.id %>
+      <%= f.submit "Save", class: 'btn btn-success' %>
+    </div>
+  </div>
+</div>
+<% end %>
