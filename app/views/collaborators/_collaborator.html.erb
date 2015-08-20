@@ -8,7 +8,7 @@
         <div class="col-md-4">
           <%= collaborator.user.email %>
         </div>
-        <% if current_user.admin? || (current_user.premium? && @wiki.user_id = current_user.id) %>
+        <% if current_user.admin? || (current_user.premium? && @wiki.user == current_user) %>
           <div class="col-md-1">
             <%= link_to "", [collaborator], method: :delete, remote: true, class: 'text-center', class: 'glyphicon glyphicon-remove' %>
           </div>

@@ -7,12 +7,12 @@
 </div>
 <br>
 <h3>Manage Collaborators</h3>
-<div class='js-collaterators'>
+<div class='js-collaborator'>
   <%= render partial: 'collaborators/collaborator', collection: @collaborators %>
 </div>
 <br>
-<% if current_user.admin? || (current_user.premium? && @wiki.user_id = current_user.id) %>
+<% if current_user.admin? || (current_user.premium? && @wiki.user == current_user) %>
   <div class='new-collaborator'>
-    <%= render partial: 'collaborators/form', locals: { collaborator: @collaborator } %>
+    <%= render partial: 'collaborators/form', locals: { collaborator: @new_collaborator } %>
   </div>
 <% end %>
